@@ -1,9 +1,22 @@
-django-rest-params
+Django REST Params
 =======================
 
-Request fn decorator that builds up a list of params and automatically returns a 400 if they are invalid.
+Request function decorator that builds up a list of params and automatically returns a 400 if they are invalid.
 The validated params are passed to the wrapped function as kwargs.
- TYPE
+
+########
+Examples
+########
+
+    from django_rest_params.decorators import params
+    
+    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
+            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
+    def get_something(request, latitude, longitude):
+        # ....
+
+
+TYPE
 Specify the type of a param:
   latitude=float
 valid options are:
