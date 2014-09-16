@@ -102,7 +102,7 @@ DEFERRED
 By default, Django model params will create an object like this:
 
 .. code:: python
-  User.objects.only('id').get(id=user_id) # all fields except for 'id' are deferred
+   User.objects.only('id').get(id=user_id) # all fields except for 'id' are deferred
 
 Usually, this is what we want, since we don't need to fetch the object from the DB (this is significantly faster than doing so).
 However, you can specify not to add the .only() by setting __deferred to False.
