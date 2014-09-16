@@ -24,7 +24,7 @@ A Few Brief Examples
    @params(offset=int, offset__default=0)
    def paged_api_call(request, offset):
        """ Handles API calls like:
-           .../paged_call             __default value is used if param is not specified
+           .../paged_call                             __default value is used if param is not specified
            .../paged_call?offset=100
        """
        pass
@@ -32,10 +32,10 @@ A Few Brief Examples
    @params(colors=('red','blue','green','yellow'), colors__many=True, colors__optional=True, colors__name='color_filter')
    def get_shirts(request, colors):
        """ Handles API calls like:
-           .../shirts?color_filter=red          __name gives lets you use a different name in Django than the actual API param
-           .../shirts?color_filter=yellow,blue  __many allows comma-separted list for GET / single val or array for POST
-           .../shirts                           Params are optional
-           .../shirts?color_filter=black        This will return an error stating black is invalid, and listing the valid options
+           .../shirts?color_filter=red                 __name gives lets you use a different name in Django than the actual API param
+           .../shirts?color_filter=yellow,blue         __many allows comma-separted list for GET / single val or array for POST
+           .../shirts                                  Params are optional
+           .../shirts?color_filter=black               This will return an error stating black is invalid, and listing the valid options
        """
        pass
 
