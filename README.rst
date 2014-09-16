@@ -1,41 +1,44 @@
 Django REST Params
-=======================
+==================
 
 Request function decorator that builds up a list of params and automatically returns a 400 if they are invalid.
 The validated params are passed to the wrapped function as kwargs.
 
-Examples
---------
+A Few Brief Examples
+--------------------
 
-    from django_rest_params.decorators import params
-    
-    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
-            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
-    def get_something(request, latitude, longitude):
-        """ Handles API calls like:
-            .../nearby?latitude=37.78&longitude=-122.4
-            .../nearby?latitude=40                     # Returns error: missing param 'longitude'
-            .../nearby?latitude=47&longitude=500.0     # Returns error: longitude must be <= 180.0
-        """
-        pass
+.. code:: python
+
+   from django_rest_params.decorators import params
+   
+   @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
+           longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
+   def get_something(request, latitude, longitude):
+       """ Handles API calls like:
+           .../nearby?latitude=37.78&longitude=-122.4
+           .../nearby?latitude=40                     # Returns error: missing param 'longitude'
+           .../nearby?latitude=47&longitude=500.0     # Returns error: longitude must be <= 180.0
+       """
+       pass
         
-    @params(offset=int, offset__default=0)
-    def paged_api_call(request, offset):
-        """ Handles API calls like:
-            .../paged_call             # __default value is used if param is not specified
-            .../paged_call?offset=100
-        """
-        pass
+   @params(offset=int, offset__default=0)
+   def paged_api_call(request, offset):
+       """ Handles API calls like:
+           .../paged_call             # __default value is used if param is not specified
+           .../paged_call?offset=100
+       """
+       pass
         
-    @params(colors=('red','blue','green','yellow'), colors__many=True, colors__optional=True, colors__name='color_filter')
-    def get_shirts(request, colors):
-        """ Handles API calls like:
-            .../shirts?color_filter=red          # __name gives lets you use a different name in Django than the actual API param
-            .../shirts?color_filter=yellow,blue  # __many allows comma-separted list for GET / single val or array for POST
-            .../shirts                           # Params are optional
-            .../shirts?color_filter=black        # This will return an error stating black is invalid, and listing the valid options
-        """
-        pass
+   @params(colors=('red','blue','green','yellow'), colors__many=True, colors__optional=True, colors__name='color_filter')
+   def get_shirts(request, colors):
+       """ Handles API calls like:
+           .../shirts?color_filter=red          # __name gives lets you use a different name in Django than the actual API param
+           .../shirts?color_filter=yellow,blue  # __many allows comma-separted list for GET / single val or array for POST
+           .../shirts                           # Params are optional
+           .../shirts?color_filter=black        # This will return an error stating black is invalid, and listing the valid options
+       """
+       pass
+
 
 TYPE
 Specify the type of a param:
