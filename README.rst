@@ -29,7 +29,8 @@ A Few Brief Examples
        """
        pass
         
-   @params(colors=('red','blue','green','yellow'), colors__many=True, colors__optional=True, colors__name='color_filter')
+   @params(colors=('red','blue','green','yellow'), colors__many=True, 
+           colors__optional=True, colors__name='color_filter')
    def get_shirts(request, colors):
        """ Handles API calls like:
            .../shirts?color_filter=red                 __name gives lets you use a different name in Django than the actual API param
