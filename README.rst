@@ -71,12 +71,19 @@ Automatically check that a param falls within a certain range. Valid for float, 
 LENGTH__LT/GT/LTE/GTE/EQ
 ------------------------
 Only valid for str params. Check the length of the str
+
+.. code:: python
+
   description__length__lt=256
   country_code__length__eq=2
   
 OPTIONAL
 --------
-  latitude__optional=True # same as latitude__default=None
+
+.. code:: python
+
+   latitude__optional=True # same as latitude__default=None
+   
 Default is False; if set to True, this param will be checked for validity (it will still return a 400 if it doesn't pass gte checks, for example),
 but will be passed to the wrapped function as None if it wasn't specified.
 
