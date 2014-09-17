@@ -18,6 +18,8 @@ Specify the types of parameters, and check that they are within acceptable range
    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
    def get_something(request, latitude, longitude):
+       # If latitude/longitude are missing or out of range, user will get an error message; if we get here, we know
+       # they're valid
        pass
 
 Create optional params with default values. Django REST Params supports POST params as well:
@@ -27,6 +29,7 @@ Create optional params with default values. Django REST Params supports POST par
    @api_view(['POST'])
    @params(offset=int, offset__default=0)
    def paged_api_call(request, offset):
+       # if offset isn't specified, default value is used
        pass
        
 Specify a tuple of valid options, allow the user to specify more than one (comma-separated), use a different name in the Django code for the param.
@@ -39,11 +42,11 @@ Django REST Params works with ViewSets as well as request functions.
        @params(colors=('red','blue','green','yellow'), colors__many=True, 
                colors__optional=True, colors__name='color_filter')
        def get_shirts(self, request, colors):
-           """ /shirts?color_filter=red                 __name gives lets you use a different name in Django than the actual API param
-               /shirts?color_filter=yellow,blue         __many allows comma-separted list for GET / single val or array for POST
-               /shirts                                  Params are optional
-               /shirts?color_filter=black               This will return an error stating black is invalid, and listing the valid options
-           """
+           # Handle API calls like these:
+           # /shirts?color_filter=red
+           # /shirts?color_filter=yellow,blue
+           # /shirts                         
+           # /shirts?color_filter=black  ERROR! This will return an error stating black is invalid, and listing the valid options
            pass
 
 Options
