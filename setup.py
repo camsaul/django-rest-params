@@ -19,11 +19,11 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/cammsaul/django-rest-params',
 
     # Author details
     author='Cam Saül',
-    AUTHOR_email='pypa-dev@googlegroups.com',
+    author_email='cammsaul@gmail.com",
 
     # Choose your license
     license='BSD',
@@ -41,7 +41,7 @@ setup(
         'Programming Language :: Python :: 2.7',
     ],
 
-    keywords='rest,django,api,params,parameters,djangorestframework',
+    keywords='rest,django,api,params,parameters,djangorestframework,decorator',
 
     packages=['django_rest_params'],
 
