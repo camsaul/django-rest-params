@@ -51,7 +51,7 @@ Specify the type of a param:
 
    latitude=float
    
-valid options are:
+Valid options are:
   - int
   - float
   - bool
