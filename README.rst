@@ -8,26 +8,25 @@ validated params are passed to the wrapped function as kwargs.
 A Few Examples
 --------------------
 
+Specify the types of parameters, and check that they are within acceptable ranges:
+
 .. code:: python
 
-   from rest_framework.decorators import api_view
    from django_rest_params.decorators import params
    
    @api_view(['GET'])
    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
    def get_something(request, latitude, longitude):
-       """ /nearby?latitude=37.78&longitude=-122.4
-           /nearby?latitude=40                     Returns error: missing param 'longitude'
-           /nearby?latitude=47&longitude=500.0     Returns error: longitude must be <= 180.0
-       """
        pass
-        
+
+Create optional params with default values. Django REST Params supports POST params as well:
+
+.. code:: python
+
+   @api_view(['POST'])
    @params(offset=int, offset__default=0)
    def paged_api_call(request, offset):
-       """ /paged_call                             __default value is used if param is not specified
-           /paged_call?offset=100
-       """
        pass
 
    class ShirtsViewSet(viewsets.GenericViewSet):
