@@ -137,14 +137,18 @@ DEFERRED
 
    user__deferred=True
 
-By default, Django REST Params will create an object like this:
+By default, Django REST Params will retrieve an object like this:
 
 .. code:: python
 
    User.objects.only('id').get(id=user_id) # all fields except for 'id' are deferred
 
-Usually, this is what we want, since we don't need to fetch the object from the DB (this is significantly faster than doing so).
-However, you can specify not to add the .only() by setting __deferred to False.
+Usually, this is preferrable, since we usually don't need to fetch the entire object from the DB, and it is significantly faster than doing so.
+By setting __deferred to False, Django REST Params will change the object retrieval call to this:
+
+.. code:: python
+
+    User.objects.get(id=user_id)  # All fields are fetched
 
 FIELD
 -----
