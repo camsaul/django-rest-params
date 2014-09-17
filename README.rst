@@ -32,7 +32,6 @@ Create optional params with default values. Django REST Params supports POST par
        # if offset isn't specified, default value is used
        pass
        
-Specify a tuple of valid options, allow the user to specify more than one (comma-separated), use a different name in the Django code for the param.
 Django REST Params works with ViewSets as well as request functions.
 
 .. code:: python
