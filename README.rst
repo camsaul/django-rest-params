@@ -1,16 +1,19 @@
 Django REST Params
 ==================
 
-Request function decorator that builds up a list of params and automatically returns a 400 if they are invalid.
-The validated params are passed to the wrapped function as kwargs.
+Function decorator to specify and validate parameters for API calls.
+Invalid params will automatically return a useful error message;
+validated params are passed to the wrapped function as kwargs.
 
 A Few Examples
 --------------------
 
 .. code:: python
 
+   from rest_framework.decorators import api_view
    from django_rest_params.decorators import params
    
+   @api_view(['GET'])
    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
    def get_something(request, latitude, longitude):
@@ -26,16 +29,18 @@ A Few Examples
            /paged_call?offset=100
        """
        pass
-        
-   @params(colors=('red','blue','green','yellow'), colors__many=True, 
-           colors__optional=True, colors__name='color_filter')
-   def get_shirts(request, colors):
-       """ /shirts?color_filter=red                 __name gives lets you use a different name in Django than the actual API param
-           /shirts?color_filter=yellow,blue         __many allows comma-separted list for GET / single val or array for POST
-           /shirts                                  Params are optional
-           /shirts?color_filter=black               This will return an error stating black is invalid, and listing the valid options
-       """
-       pass
+
+   class ShirtsViewSet(viewsets.GenericViewSet):
+   
+       @params(colors=('red','blue','green','yellow'), colors__many=True, 
+               colors__optional=True, colors__name='color_filter')
+       def get_shirts(self, request, colors):
+           """ /shirts?color_filter=red                 __name gives lets you use a different name in Django than the actual API param
+               /shirts?color_filter=yellow,blue         __many allows comma-separted list for GET / single val or array for POST
+               /shirts                                  Params are optional
+               /shirts?color_filter=black               This will return an error stating black is invalid, and listing the valid options
+           """
+           pass
 
 Options
 =======
@@ -153,3 +158,15 @@ Valid methods for passing this param. Default is 'POST' for POST/PUT requests an
 
   user__method='GET' # GET only
   user__method=('GET', 'POST') # allow either source
+  
+  
+Tests
+=====
+  
+Run the (fairly extensive) unit tests:
+  
+.. code:: bash
+  
+   python -m tests.tests
+   
+Mock classes are used to simulate Django models / managers / Django REST Framework requests, so these tests don't actually need to run inside a Django app.
