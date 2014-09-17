@@ -95,8 +95,8 @@ DEFAULT
    sort_by=('publisher_guides_count', 'most_recent')
    sort_by__default='publisher_guides_count'
    
- Implies that this param is optional.
- Specify a default value for this param if it isn't specified.
+Implies that this param is optional.
+Specify a default value for this param if it isn't specified.
  
 NAME
 ----
