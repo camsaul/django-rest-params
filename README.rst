@@ -46,20 +46,26 @@ Options
 TYPE
 ----
 Specify the type of a param:
-  latitude=float
+.. code:: python
+
+   latitude=float
+   
 valid options are:
-  * int
-  * float
-  * bool
-  * str/unicode
-  * tuple/list/set/frozenset (which will be treated as a list of valid options)
-  * a django Model subclass (in which case the param will be treated as a PK to that Model)
+  - int
+  - float
+  - bool
+  - str/unicode
+  - tuple/list/set/frozenset (which will be treated as a list of valid options)
+  - a django Model subclass (in which case the param will be treated as a PK to that Model)
   
 GT/LT/GTE/LTE
 -------------
 Automatically check that a param falls within a certain range. Valid for float, int, or Model PK, which all do numerical comparisons.
-  latitude__gte=-90.0
-  latitude__lte=90.0
+
+.. code:: python
+
+   latitude__gte=-90.0
+   latitude__lte=90.0
   
 LENGTH__LT/GT/LTE/GTE/EQ
 ------------------------
