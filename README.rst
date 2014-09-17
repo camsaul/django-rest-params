@@ -18,8 +18,8 @@ Specify the types of parameters, and check that they are within acceptable range
    @params(latitude=float, latitude__gte=-90.0, latitude__lte=90.0,
            longitude=float, longitude__gte=-180.0, longitude__lte=180.0)
    def get_something(request, latitude, longitude):
-       # If latitude/longitude are missing or out of range, user will get an error message; if we get here, we know
-       # they're valid
+       # If latitude/longitude are missing or out of range, user will get an error message.
+       # If we get here, we know they're valid
        pass
 
 Create optional params with default values. Django REST Params supports POST params as well:
@@ -43,10 +43,10 @@ Django REST Params works with ViewSets as well as request functions.
                colors__optional=True, colors__name='color_filter')
        def get_shirts(self, request, colors):
            # Handle API calls like these:
-           # /shirts?color_filter=red
-           # /shirts?color_filter=yellow,blue
-           # /shirts                         
-           # /shirts?color_filter=black  ERROR! This will return an error stating black is invalid, and listing the valid options
+           # /shirts?color_filter=red          __name lets you use different name in function
+           # /shirts?color_filter=yellow,blue  __many lets you pass multiple values
+           # /shirts                           __optional will set colors to None if it isn't specified
+           # /shirts?color_filter=black        ERROR! This will return an error stating black is invalid, and listing the valid options
            pass
 
 Options
