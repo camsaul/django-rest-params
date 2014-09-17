@@ -46,6 +46,7 @@ Options
 TYPE
 ----
 Specify the type of a param:
+
 .. code:: python
 
    latitude=float
