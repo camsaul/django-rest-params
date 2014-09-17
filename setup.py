@@ -3,7 +3,7 @@
 from codecs import open  # To use a consistent encoding
 from os import path
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 here = path.abspath(path.dirname(__file__))
 
@@ -43,7 +43,7 @@ setup(
 
     keywords='rest,django,api,params,parameters,djangorestframework,decorator',
 
-    packages=['django_rest_params'],
+    packages=find_packages(exclude=['tests']),
 
     install_requires=['django', 'djangorestframework']
 )
