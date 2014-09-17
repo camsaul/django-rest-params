@@ -50,8 +50,8 @@ Specify the type of a param:
 .. code:: python
 
    latitude=float
-   
-Valid options are:
+
+valid options are:
   - int
   - float
   - bool
