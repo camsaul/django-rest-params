@@ -23,7 +23,7 @@ setup(
 
     # Author details
     author='Cam Saül',
-    author_email='cammsaul@gmail.com",
+    author_email='cammsaul@gmail.com',
 
     # Choose your license
     license='BSD',
