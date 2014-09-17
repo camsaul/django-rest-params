@@ -116,6 +116,7 @@ MANY
 ----
 
 .. code:: python
+
    users=int # param 'users=1' is ok, 'users=1,2' is not
    users__many=True # param 'users=1,2' will return tuple of (1, 2), 'users=1' will return (1)
    
