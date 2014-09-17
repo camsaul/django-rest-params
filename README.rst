@@ -89,22 +89,36 @@ but will be passed to the wrapped function as None if it wasn't specified.
 
 DEFAULT
 -------
-  sort_by=('publisher_guides_count', 'most_recent')
-  sort_by__default='publisher_guides_count'
+
+.. code:: python
+
+   sort_by=('publisher_guides_count', 'most_recent')
+   sort_by__default='publisher_guides_count'
+   
  Implies that this param is optional.
  Specify a default value for this param if it isn't specified.
  
 NAME
 ----
 By default, we'll look for a param with the same name as the kwargs, e.g.
-  user_id=User # look for user_id param, create a User object and pass to wrapped fn as user_id
+
+.. code:: python
+
+   user_id=User # look for user_id param, create a User object and pass to wrapped fn as user_id
+   
 But sometimes it makes more sense to call such a param 'user', so you can do:
-  user=User, user__name='user_id' # look for user_id, assign to user
+
+.. code:: python
+
+   user=User, user__name='user_id' # look for user_id, assign to user
   
 MANY
 ----
-  users=int # param 'users=1' is ok, 'users=1,2' is not
-  users__many=True # param 'users=1,2' will return tuple of (1, 2), 'users=1' will return (1)
+
+.. code:: python
+   users=int # param 'users=1' is ok, 'users=1,2' is not
+   users__many=True # param 'users=1,2' will return tuple of (1, 2), 'users=1' will return (1)
+   
 Allow User to (optionally) specify params as CSV (GET) or Array (JSON POST)
 If many==True, the params will be returned as a tuple regardless of whether or not there was only one param
 
@@ -125,12 +139,19 @@ However, you can specify not to add the .only() by setting __deferred to False.
 
 FIELD
 -----
-  category = Category # by default, do Category.get(id=category)
-  category__field='name' # instead, do Category.get(name=category)
+
+.. code:: python
+
+   category = Category # by default, do Category.get(id=category)
+   category__field='name' # instead, do Category.get(name=category)
+   
 Applies to Django models only. By default, we treat the param as an ID; instead, you can treat it as something else, e.g. 'name'
 
 METHOD
 ------
 Valid methods for passing this param. Default is 'POST' for POST/PUT requests and GET for all others
+
+.. code:: python
+
   user__method='GET' # GET only
   user__method=('GET', 'POST') # allow either source
