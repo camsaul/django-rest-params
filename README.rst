@@ -118,7 +118,7 @@ By default, we'll look for a param with the same name as the kwargs, e.g.
 
    user_id=User # User is a Django model. Look for user_id param, fetch corresponding User, pass to wrapped fn as user_id
    
-But sometimes it makes more sense to call such a param 'user', so you can do:
+But sometimes it makes more sense to call such a param 'user' locally, so you can do:
 
 .. code:: python
 
