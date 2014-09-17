@@ -5,6 +5,10 @@ Function decorator to specify and validate parameters for API calls.
 Invalid params will automatically return a useful error message;
 validated params are passed to the wrapped function as kwargs.
 
+.. code:: bash
+
+   pip install django-rest-params==1.0.0
+
 A Few Examples
 --------------------
 
