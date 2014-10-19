@@ -3,7 +3,8 @@
 from codecs import open  # To use a consistent encoding
 from os import path
 
-from setuptools import find_packages, setup
+from setuptools import find_packages
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 
@@ -13,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-rest-params',
-    version='1.0.0',
+    version='1.0.1',
 
     description='Function decorator for Django REST Framework for specifying and constraining API parameters.',
     long_description=long_description,
