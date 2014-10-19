@@ -14,7 +14,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='django-rest-params',
-    version='1.0.1',
+    version='1.0.2',
 
     description='Function decorator for Django REST Framework for specifying and constraining API parameters.',
     long_description=long_description,

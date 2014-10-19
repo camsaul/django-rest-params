@@ -3,7 +3,10 @@ import unittest
 from django.conf import settings
 from rest_framework.response import Response
 
-from django_rest_params.decorators import params
+# Django settings need to be configured before importing the decorator
+if __name__ == '__main__':
+    settings.configure()
+    from django_rest_params.decorators import params
 
 
 class _MockUserManager(object):
@@ -83,6 +86,7 @@ class ParamDecoratorTest(unittest.TestCase):
             pp(response.data)
             print "\n===================================================================\n"
             self.assertEqual(response.status_code, expected_status_code)
+        return response.data
 
     def test_int(self):
         """ Test that we can require an 'int' param """
@@ -135,6 +139,26 @@ class ParamDecoratorTest(unittest.TestCase):
 
         # try with wrong type
         self.do_fake_request(my_request, expected_status_code=400, get={'my_str': 100})
+
+    def test_bool(self):
+        """ Test that we can require a 'bool' param """
+        @params(my_bool=bool)
+        def my_request(request, my_bool):
+            self.assertTrue(isinstance(my_bool, bool))
+            return Response({'result': my_bool})
+
+        # check things that should be true
+        for v in 1, 'true', 'True', 'TRUE':
+            self.assertTrue(self.do_fake_request(my_request, get={'my_bool': v})['result'])
+
+        # things that should be false
+        for v in 0, 'false', 'False', 'FALSE':
+            self.assertFalse(self.do_fake_request(my_request, get={'my_bool': v})['result'])
+
+        # make sure some other values don't count as true
+        self.do_fake_request(my_request, expected_status_code=400, get={'my_bool': 'ok'})
+        self.do_fake_request(my_request, expected_status_code=400, get={'my_bool': 2})
+        self.do_fake_request(my_request, expected_status_code=400, post={'my_bool': 'T'})
 
     def test_unicode(self):
         """ Test that a unicode 'str' works correctly """
@@ -365,6 +389,4 @@ class ParamDecoratorTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    settings.configure()
-
     unittest.main()

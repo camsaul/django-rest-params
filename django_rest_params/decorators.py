@@ -1,7 +1,12 @@
 from functools import wraps
 
+from django.conf import settings
 from rest_framework import status
 from rest_framework.response import Response
+
+SETTINGS = getattr(settings, 'DJANGO_REST_PARAMS', {})
+TRUE_VALUES = SETTINGS.get('TRUE_VALUES', ('1', 'true'))
+FALSE_VALUES = SETTINGS.get('FALSE_VALUES', ('0', 'false'))
 
 
 def params(**kwargs):
@@ -63,7 +68,13 @@ def params(**kwargs):
                     assert(isinstance(param, (str, unicode)))
                     param = unicode(param)
                 elif self.param_type == bool:
-                    param = bool(param)
+                    param = str(param).lower()  # bool isn't case sensitive
+                    if param in TRUE_VALUES:
+                        param = True
+                    elif param in FALSE_VALUES:
+                        param = False
+                    else:
+                        raise Exception('%s is not a valid bool: must be one of: %s', param, TRUE_VALUES + FALSE_VALUES)
                 elif hasattr(self.param_type, '_default_manager'):  # isinstance(django.models.Model) doesn't seem to work, but this is a good tell
                     query_set = self.param_type.objects
                     if self.deferred:
@@ -198,7 +209,7 @@ def params(**kwargs):
 
                 try:
                     # optional/default
-                    if not param:
+                    if param is None:  # but not False, because that's a valid boolean param
                         if not validator.optional:
                             raise Exception('Param is missing')
                         else:

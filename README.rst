@@ -7,7 +7,7 @@ validated params are passed to the wrapped function as kwargs.
 
 .. code:: bash
 
-   pip install django-rest-params==1.0.1
+   pip install django-rest-params==1.0.2
 
 A Few Examples
 --------------------
@@ -66,7 +66,7 @@ Specify the type of a param:
 valid options are:
   - int
   - float
-  - bool
+  - bool (1/true are considered True, and 0/false False; this is not case-sensitive)
   - str/unicode
   - tuple/list/set/frozenset (which will be treated as a list of valid options)
   - a django Model subclass (in which case the param will be treated as a PK to that Model)
@@ -173,6 +173,18 @@ Valid methods for passing this param. Default is 'POST' for POST/PUT requests an
   user__method='GET' # GET only
   user__method=('GET', 'POST') # allow either source
 
+Extra Customization
+===================
+
+You can tweak some behavior by setting adding a 'DJANGO_REST_PARAMS' dict to your Django settings module:
+
+.. code:: python
+
+  DJANGO_REST_PARAMS: {
+      'TRUE_VALUES': ('1', 'true'),    # tuple of case-insensitive string values we'll accept as True for a param of type bool.
+      'FALSE_VALUES': ('0', 'false'),  # string values that are considered false
+  }
+
 
 Tests
 =====
@@ -181,6 +193,6 @@ Run the (fairly extensive) unit tests:
 
 .. code:: bash
 
-   python -m tests.tests
+   make test
 
 Mock classes are used to simulate Django models / managers / Django REST Framework requests, so these tests don't actually need to run inside a Django app.
