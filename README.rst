@@ -196,3 +196,9 @@ Run the (fairly extensive) unit tests:
    make test
 
 Mock classes are used to simulate Django models / managers / Django REST Framework requests, so these tests don't actually need to run inside a Django app.
+
+
+License
+=======
+
+3-clause BSD.
