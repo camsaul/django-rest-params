@@ -1,3 +1,6 @@
+.. image:: https://badge.fury.io/py/django-rest-params.svg
+    :target: https://badge.fury.io/py/django-rest-params
+
 Django REST Params
 ==================
 
