@@ -1,3 +1,4 @@
+import sys
 from functools import wraps
 
 from django.conf import settings
@@ -17,7 +18,10 @@ def params(**kwargs):
 
     # Types that we'll all for as 'tuple' params
     TUPLE_TYPES = tuple, set, frozenset, list
-    VALID_TYPES = int, float, str, unicode, bool
+    if (sys.version_info > (3, 0)):
+        VALID_TYPES = int, float, str, bool
+    else:
+        VALID_TYPES = int, float, str, unicode, bool
 
     class ParamValidator(object):
         # name
